@@ -1,1 +1,1 @@
-# Programming_in_Python_for_testers
+# software-testing's training 'Programming in Python for testers'
