@@ -8,6 +8,7 @@ class EntryHelper:
 
     def create_entry(self, entry):
         wd = self.app.wd
+        self.init_entry_creation()
         # fill entry's fields
         wd.find_element_by_name("firstname").click()
         wd.find_element_by_name("firstname").clear()
@@ -44,6 +45,7 @@ class EntryHelper:
         wd.find_element_by_name("byear").send_keys(entry.byear)
         # submit entry creation
         wd.find_element_by_xpath("//div[@id='content']/form/input[21]").click()
+        self.return_to_home_page()
 
     def init_entry_creation(self):
         wd = self.app.wd
