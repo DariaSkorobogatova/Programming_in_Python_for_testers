@@ -6,6 +6,10 @@ class GroupHelper:
         wd = self.app.wd
         wd.find_element_by_link_text("group page").click()
 
+    def go_home(self):
+        wd = self.app.wd
+        wd.find_element_by_link_text("home").click()
+
     def create(self, group):
         wd = self.app.wd
         self.open_groups_page()

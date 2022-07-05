@@ -46,6 +46,7 @@ class EntryHelper:
 
     def modify_entry_firstname(self, new_entry_data):
         wd = self.app.wd
+        wd.find_element_by_link_text("home").click()
         self.select_first_entry()
         wd.find_element_by_xpath("//*[@title='Edit']").click()
         self.fill_entry_fields(new_entry_data)
