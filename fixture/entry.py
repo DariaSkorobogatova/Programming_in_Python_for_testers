@@ -1,4 +1,3 @@
-import time
 
 
 class EntryHelper:
@@ -7,7 +6,8 @@ class EntryHelper:
 
     def return_to_home_page(self):
         wd = self.app.wd
-        wd.find_element_by_link_text("home page").click()
+        if not wd.current_url.endswith("/addressbook/"):
+            wd.find_element_by_link_text("home page").click()
 
     def create_entry(self, entry):
         wd = self.app.wd
@@ -46,12 +46,17 @@ class EntryHelper:
 
     def modify_entry_firstname(self, new_entry_data):
         wd = self.app.wd
-        wd.find_element_by_link_text("home").click()
+        self.go_main_page()
         self.select_first_entry()
         wd.find_element_by_xpath("//*[@title='Edit']").click()
         self.fill_entry_fields(new_entry_data)
         wd.find_element_by_name("update").click()
         self.return_to_home_page()
+
+    def go_main_page(self):
+        wd = self.app.wd
+        if not wd.current_url.endswith("/addressbook/"):
+            wd.find_element_by_link_text("home").click()
 
     def delete_first_entry(self):
         wd = self.app.wd
@@ -70,5 +75,5 @@ class EntryHelper:
 
     def count(self):
         wd = self.app.wd
-        wd.find_element_by_link_text("home").click()
+        self.go_main_page()
         return len(wd.find_elements_by_name("selected[]"))
