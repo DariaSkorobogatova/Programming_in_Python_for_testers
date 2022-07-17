@@ -1,4 +1,4 @@
-
+from model.entry import Entry
 
 class EntryHelper:
     def __init__(self, app):
@@ -77,3 +77,22 @@ class EntryHelper:
         wd = self.app.wd
         self.go_main_page()
         return len(wd.find_elements_by_name("selected[]"))
+
+    def get_entry_list(self):
+        wd = self.app.wd
+        self.go_main_page()
+        entries = []
+        for element in wd.find_elements_by_name("entry"):
+            # fio = []
+            # for el in element.find_elements_by_tag_name("td"):
+            #     fio.append(el.text)
+            # textname = fio[2]
+            # textlastname = fio[1]
+            # fio = []
+            fio = element.find_elements_by_tag_name("td")
+            textname = fio[2].text
+            textlastname = fio[1].text
+            id = element.find_element_by_name("selected[]").get_attribute("value")
+            entries.append(Entry(firstname=textname, lastname=textlastname, id=id))
+        return entries
+
